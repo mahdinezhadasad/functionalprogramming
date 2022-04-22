@@ -16,13 +16,31 @@ public class PredicateExample {
      }
 
 
+     public static void predicateOr(){
+
+         System.out.println(p1.or(p2).test(8));
+
+
+     }
+
+     public static void predicatNegate(){
+
+
+         System.out.println("predicate negat result is " + p1.or(p2).negate().test(7) );
+     }
+
+
     public static void main(String[] args) {
 
 
 
-        System.out.println(p.test(4));
+      //  System.out.println(p.test(4));
 
-        predicateAnd();
+       // predicateAnd();
+
+        //predicateOr();
+
+        predicatNegate();
 
 
 
