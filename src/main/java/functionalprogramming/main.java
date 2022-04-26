@@ -16,8 +16,6 @@ public class main {
 
     public static void printName(){
 
-
-
         List<Student> studentDataBase = data.StudentDataBase.getAllStudents();
 
         studentDataBase.forEach(c2);
@@ -25,9 +23,6 @@ public class main {
     }
 
     public static void printNameAndActivitiesUsingCondition(){
-
-
-
 
         List<Student> studentList = StudentDataBase.getAllStudents();
 
@@ -38,25 +33,12 @@ public class main {
 
         }
 
-
-
-
         }));
-
-
-
-
 
     }
 
     public static void main(String[] args) {
-
-
         printNameAndActivitiesUsingCondition();
-
-
-
-
 
     }
 }

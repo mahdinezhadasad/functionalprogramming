@@ -19,12 +19,7 @@ public class PredicateAndConsumeExample {
 
     BiConsumer<String, List<String>>  studentBiConsumer = (name,activities) -> System.out.println(name + " : " + activities);
 
-
-
-
     Consumer<Student> studentConsumer = (student -> {
-
-
 
         if(biPredicate.test(student.getGradeLevel(),student.getGpa())){
 
@@ -33,30 +28,19 @@ public class PredicateAndConsumeExample {
 
         }
 
-
-
     });
 
 
     public void  printNameAndActivities(List<Student> students){
 
-
-
         students.forEach(studentConsumer);
-
-
-
     }
-
 
     public static void main(String[] args) {
 
         List<Student> studentList = StudentDataBase.getAllStudents();
 
         new PredicateAndConsumeExample().printNameAndActivities(studentList);
-
-
-
 
 
     }
