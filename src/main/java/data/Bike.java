@@ -11,6 +11,10 @@ public class Bike {
         this.model = model;
     }
 
+    public Bike() {
+
+    }
+
     public String getName() {
         return name;
     }

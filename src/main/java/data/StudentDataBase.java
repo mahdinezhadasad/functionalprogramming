@@ -8,7 +8,19 @@ import java.util.function.Supplier;
 public class StudentDataBase {
 
     public static Supplier<Student> studentSupplier = () -> {
-        return  new Student("Adam",2,4.0,"male", Arrays.asList("swimming", "basketball","volleyball"));
+
+        Bike bike = new Bike();
+        bike.setName("mahd");
+        bike.setModel("serw");
+
+
+
+
+        Student student = new Student("Adam",2,4.0,"male", Arrays.asList("swimming", "basketball","volleyball"));
+
+        student.setBike(Optional.ofNullable(bike));
+
+        return  student;
     };
 
     public static Optional<Student> getOptionalStudent(){
