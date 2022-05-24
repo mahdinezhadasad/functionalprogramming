@@ -91,7 +91,7 @@ public class Main {
         return stringBuilder.toString();
     }
 
-    private static String arrayToJson(Object arrayInstance,int indentSize){
+    private static String arrayToJson(Object arrayInstance,int indentSize) throws IllegalAccessException {
         StringBuilder stringBuilder = new StringBuilder();
         int arrayLength = Array.getLength(arrayInstance);
 
@@ -115,6 +115,11 @@ public class Main {
 
                 stringBuilder.append(formatStringValue(element.toString()));
 
+
+            }
+            else{
+
+                stringBuilder.append(objectToJson(element,indentSize+1));
 
             }
             if(i!=arrayLength-1){
