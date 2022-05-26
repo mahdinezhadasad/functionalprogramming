@@ -73,7 +73,6 @@ public class Main {
             }
             else{
 
-
                 stringBuilder.append(objectToJson(field.get(instance),identSize+1));
             }
 
@@ -129,16 +128,9 @@ public class Main {
 
             }
 
-
-
-
-
         }
         stringBuilder.append("]");
         return stringBuilder.toString();
-
-
-
 
     }
 
@@ -149,7 +141,6 @@ public class Main {
         ||type.equals(long.class)
         ||type.equals(short.class)
         ){
-
 
             return instance.toString();
         }
