@@ -1,20 +1,71 @@
 package test;
 
+import data.Product;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProductTest {
 
     public static void main(String[] args) {
+
+        testGetters(Product.class);
+        testSetters(Product.class);
+
+
+    }
+
+    public static void testSetters(Class<?> dataClass){
+
+       List<Field> fields = getAllFields(dataClass);
+
+        for(Field field: fields){
+
+            String setterName = "set"+captilazeFirstLetter(field.getName());
+            Method setterMethod = null;
+
+            try {
+                setterMethod = dataClass.getMethod(setterName,field.getType()); // important part
+            } catch (NoSuchMethodException e) {
+                throw new IllegalStateException(String.format("Setter : %s not found", setterName));
+            }
+            if(!setterMethod.getReturnType().equals(void.class)){
+
+                throw new IllegalStateException(String.format("Setter method : %s has to return void",setterMethod));
+
+            }
+
+        }
+
+
+
+    }
+
+    private static List<Field> getAllFields(Class<?> clazz){
+        if(clazz==null|| clazz.equals(Object.class)){
+
+
+            return Collections.emptyList();
+
+        }
+
+        Field[] currentClassFields = clazz.getDeclaredFields();
+
+        List<Field>  inheritedFields = getAllFields(clazz.getSuperclass());
+
+        List<Field>  allFields = new ArrayList<>();
+
+        allFields.addAll(Arrays.asList(currentClassFields));
+        allFields.addAll(inheritedFields);
+        return allFields;
 
 
     }
 
     public static void testGetters(Class<?>  dataClass){
 
-        Field[] fields = dataClass.getDeclaredFields();
+        List<Field> fields = getAllFields(dataClass);
 
         Map<String, Method>  methodNameToMethod = mapMethodNameToMethod(dataClass);
 
@@ -23,7 +74,7 @@ public class ProductTest {
             String getterName = "get" + captilazeFirstLetter(field.getName());
 
 
-            if(!methodNameToMethod.containsKey(gettername)){
+            if(!methodNameToMethod.containsKey(getterName)){
 
                 throw new IllegalStateException(String.format("Field : %s doesnt have a getter method",field.getName()));
 
@@ -39,11 +90,16 @@ public class ProductTest {
 
             }
 
+            if(getter.getParameterCount()>0){
 
-
+                throw new IllegalStateException(String.format("Getter : %s has %d argument",getterName));
+            }
         }
+    }
 
+    public static String captilazeFirstLetter(String fieldName){
 
+        return fieldName.substring(0,1).toUpperCase().concat(fieldName.substring(1));
 
     }
 
